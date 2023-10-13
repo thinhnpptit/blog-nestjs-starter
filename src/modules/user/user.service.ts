@@ -1,4 +1,4 @@
-import { RegisterUserDto } from '@modules/auth/dto';
+import { RegisterUserDto } from '../auth/dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

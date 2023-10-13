@@ -1,5 +1,5 @@
 // local.strategy.ts
-import { User } from '@modules/user/user.entity';
+import { User } from '../../user/user.entity';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';

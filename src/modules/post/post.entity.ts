@@ -27,12 +27,12 @@ export class Post extends BaseEntity {
     type: Date,
     default: moment(new Date()).format('YYYY-MM-DD HH:ss'),
   })
-  createdAt;
+  createdAt: any;
 
   @Column({
     type: Date,
     default: moment(new Date()).format('YYYY-MM-DD HH:ss'),
     nullable: true,
   })
-  updatedAt;
+  updatedAt: any;
 }
