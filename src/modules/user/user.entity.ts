@@ -2,6 +2,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { IsDate, IsEmail, Min } from 'class-validator';
 import moment from 'moment';
+import { Exclude, Expose } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -9,14 +10,17 @@ export class User {
   id: string;
 
   @Column()
+  @Expose()
   name: string;
 
   @Column({ unique: true })
   @IsEmail()
+  @Expose()
   email: string;
 
   @Column()
   @Min(0)
+  @Exclude()
   password: string;
 
   @Column({

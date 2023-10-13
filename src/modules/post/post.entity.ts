@@ -2,6 +2,7 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 // import moment from 'moment';
 import moment from 'moment-timezone';
+import { Transform } from 'class-transformer';
 
 @Entity()
 export class Post extends BaseEntity {
@@ -13,6 +14,14 @@ export class Post extends BaseEntity {
 
   @Column()
   content: string;
+
+  @Column({ nullable: true })
+  @Transform((value) => {
+    if (value) {
+      return value;
+    }
+  })
+  category?: string;
 
   @Column({
     type: Date,

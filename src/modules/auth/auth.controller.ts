@@ -7,6 +7,7 @@ import {
   Post,
   Req,
   Res,
+  SerializeOptions,
   UseGuards,
 } from '@nestjs/common';
 import { IPayloadJwt } from './auth.interface';
@@ -19,6 +20,9 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')
 @Controller('auth')
+@SerializeOptions({
+  strategy: 'excludeAll',
+})
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
@@ -33,6 +37,7 @@ export class AuthController {
 
   @Post('login')
   @UseGuards(LocalAuthGuard)
+  // Don't use @Res() decorator because it interferes with the ClassSerializerInterceptor
   public async login(@Req() req: IRequestWithUser, @Res() res: Response) {
     const { user } = req;
     const payload: IPayloadJwt = {
@@ -40,10 +45,12 @@ export class AuthController {
       email: user.email,
     };
     const cookie = this.authService.getCookieWithToken(payload);
-    res.setHeader('Set-Cookie', cookie);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...rest } = user;
-    return res.send(rest);
+    // res.setHeader('Set-Cookie', cookie);
+    // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // const { password, ...rest } = user;
+    // return res.send(rest);
+    req.res.setHeader('Set-Cookie', cookie);
+    return user;
   }
 
   @Get()
