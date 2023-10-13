@@ -7,6 +7,7 @@ import { PostModule } from './modules/post/post.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ormConfig } from './common/config/ormConfig';
 import { UserModule } from './modules/user/user.module';
+import { AuthModule } from '@modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UserModule } from './modules/user/user.module';
       envFilePath: '.env',
     }),
     TypeOrmModule.forRoot(ormConfig()),
+    AuthModule,
     PostModule,
     UserModule,
   ],

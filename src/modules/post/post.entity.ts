@@ -1,7 +1,7 @@
 // post.entity.ts
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 // import moment from 'moment';
-import * as moment from 'moment-timezone';
+import moment from 'moment-timezone';
 
 @Entity()
 export class Post extends BaseEntity {
